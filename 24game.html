@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>24 Game</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <script src="https://code.jquery.com/jquery-3.4.0.slim.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="./24game.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #00a651;
+            width: 100%;
+            height: 100%;
+        }
+
+        .card {
+            position: relative;
+            float: left;
+            margin-right: 10px;
+            width: 150px;
+            height: 220px;
+            border-radius: 10px;
+            background: #fff;
+            -webkit-box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3);
+            box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3);
+        }
+
+        .card p {
+            text-align: center;
+            font: 100px/220px Georgia, Times New Roman, serif;
+        }
+
+        .suitdiamonds:before,
+        .suitdiamonds:after {
+            content: "♦";
+            color: #ff0000;
+        }
+
+        .suithearts:before,
+        .suithearts:after {
+            content: "♥";
+            color: #ff0000;
+        }
+
+        .suitclubs:before,
+        .suitclubs:after {
+            content: "♣";
+            color: #000;
+        }
+
+        .suitspades:before,
+        .suitspades:after {
+            content: "♠";
+            color: #000;
+        }
+
+        div[class*='suit']:before {
+            position: absolute;
+            font-size: 35px;
+            left: 5px;
+            top: 5px;
+        }
+
+        div[class*='suit']:after {
+            position: absolute;
+            font-size: 35px;
+            right: 5px;
+            bottom: 5px;
+        }
+
+        .hand {
+            margin: 50px;
+        }
+
+        /* For modern browsers */
+        .hand:before,
+        .hand:after {
+            content: "";
+            display: table;
+        }
+
+        .hand:after {
+            clear: both;
+        }
+
+        /* For IE 6/7 (trigger hasLayout) */
+        .hand {
+            zoom: 1;
+        }
+
+        .card:hover {
+            cursor: pointer;
+        }
+
+        button {
+            width: 60px;
+            height: 30px;
+            font-size: 16px;
+            margin-left: 100px;
+        }
+    </style>
+    <script>
+        $(function () {
+            $("#sortable").sortable();
+            $("#sortable").disableSelection();
+        });
+    </script>
+
+</head>
+
+<body>
+    <div>
+        <input type="number" value="1" id="inCard1" />
+        <input type="number" value="1" id="inCard2" />
+        <input type="number" value="1" id="inCard3" />
+        <input type="number" value="1" id="inCard4" />
+        <button onclick="game24.showCards2()">指定</button>
+    </div>
+    <div>
+        甲方现有( <span id="player1">26</span> )张牌<br />
+        乙方现有( <span id="player2">26</span> )张牌
+    </div>
+    <div class="hand">
+        <ul id="sortable">
+            <li class="card suitdiamonds" id="card1">
+                <p>二</p>
+            </li>
+
+            <li class="card suithearts" id="card2">
+                <p>十</p>
+            </li>
+
+            <li class="card suitclubs" id="card3">
+                <p>四</p>
+            </li>
+
+            <li class="card suitspades" id="card4">
+                <p>点</p>
+            </li>
+        </ul>
+    </div>
+    <div>
+        <button onclick="game24.showCards()" id="showBtn">发牌</button>
+        <button onclick="game24.showHint()" disabled id="hintBtn">提示</button>
+    </div>
+    <div>
+        <button onclick="game24.draw()" disabled id="drawBtn">平局</button>
+        <button onclick="player.fail(0)" disabled id="failBtn1">甲方输</button>
+        <button onclick="player.fail(1)" disabled id="failBtn2">乙方输</button>
+    </div>
+    <div id="hints"></div>
+</body>
+
+</html>

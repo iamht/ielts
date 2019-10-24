@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>IELTS WRITING TEST</title>
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta charset="utf-8">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon//favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon//favicon-16x16.png">
+    <link rel="manifest" href="favicon//site.webmanifest">
+    <script src="http://vuejs.org/js/vue.min.js"></script>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div id="header">
+        <navi-bar now="writing"></navi-bar>
+    </div>
+    <div id="app">
+        <div class="panel panel-primary">
+            <div class="panel-heading">{{ current2.question }}</div>
+            <div v-show="current2.keywords != ''" class="keywords">
+                <span v-for="key in current2.keywords.split(',')" class="key">{{ key }}</span>
+            </div>
+            <div v-show="current2.sample != ''" class="panel-body" v-html="current2.sample"></div>
+            <div style="text-align: right">({{ current2.sample | wordCounter }} words)</div>
+        </div>
+        <page-bar :total="list.length" @goto="goto"></page-bar>
+    </div>
+    <script src="./navi.js"></script>
+    <script src="./writing.js"></script>
+    <script src="./app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,8 @@
+Vue.component('navi-bar', {
+  props : ['now'],
+  template: '<nav class="navbar navbar-inverse navbar-fixed-top"><div class="container-fluid"><div class="navbar-header"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><span class="navbar-brand site-name"></span></div><div class="collapse navbar-collapse" id="myNavbar"><ul class="nav navbar-nav navbar-right"><li :class="now == \'index\' ? \'active\' : \'\'"><a href="index.html">Home</a></li><li :class="now == \'listening\' ? \'dropdown active\' : \'dropdown\'"><a class="dropdown-toggle"data-toggle="dropdown" href="#">Listening<span class="caret"></span></a><ul class="dropdown-menu dropdown-menu-left"><li><a href="listening_s1.html">Section 1</a></li><li><a href="listening_s2.html">Section 2</a></li><li><a href="listening_s3.html">Section 3</a></li><li><a href="listening_s4.html">Section 4</a></li></ul></li><li :class="now == \'speaking\' ? \'dropdown active\' : \'dropdown\'"><a class="dropdown-toggle"data-toggle="dropdown" href="#">Speaking<span class="caret"></span></a><ul class="dropdown-menu dropdown-menu-left"><li><a href="speaking_part1.html">Part 1</a></li><li><a href="speaking_part23.html">Part 2-3</a></li></ul></li><li :class="now == \'writing\' ? \'active\' : \'\'"><a href="writing.html">Writing</a></li></ul></div></div></nav>'
+});
+
+var header = new Vue({
+  el: "#header"
+});

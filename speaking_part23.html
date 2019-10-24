@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>IELTS SPEAKING TEST PART 2&3</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon//favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon//favicon-16x16.png">
+    <link rel="manifest" href="favicon//site.webmanifest">
+    <script src="http://vuejs.org/js/vue.min.js"></script>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div id="header">
+        <navi-bar now="speaking"></navi-bar>
+    </div>
+    <div id="app" class="row content">
+        <div class="col-sm-3" style="height: 600px; overflow: auto;">
+            <ul class="nav nav-pills nav-stacked">
+                <li v-for="(item, i) in list" :class="selected == i ? 'active' : ''">
+                    <a @click="goto(i)" v-if="!item.isKey">{{ i + 1 }}. <s>{{ item.title }}</s>
+                        <span v-if="item.category != ''"> ({{ item.category }})</span>
+                    </a>
+                    <a @click="goto(i)" v-else>{{ i + 1 }}. {{ item.title }}
+                        <span v-if="item.category != ''"> ({{ item.category }})</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-sm-9" style="overflow: auto; height: 600px;">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    {{ selected + 1 }}. {{ current2.title }}
+                </div>
+                <div class="panel-body">
+                    <div v-if="current2.keywords" class="keywords">
+                        <span v-for="key in current2.keywords.split(',')" class="key">{{ key }}</span>
+                    </div>
+                    <div class="subtitle">{{ current2.part2.question }}</div>
+                    <div class="questions">
+                        <div v-for="question in current2.part2.say">
+                            {{ question.ask }}
+                            <div v-if="question.sample" class="sample">
+                                <ol>
+                                    <li v-for="sentence in question.sample.split('. ')" v-html="sentence"></li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <div v-if="current2.part2.sample" class="sample" v-html="current2.part2.sample"></div>
+                    <div class="subtitle"> Part 3</div>
+                    <div class="questions">
+                        <div v-for="question in current2.part3">
+                            {{ question.ask }}
+                            <div v-if="question.sample" class="sample" v-html="question.sample"></div>
+                            <ol v-if="question.myanswer">
+                                <li v-for="myanswer in question.myanswer.split('. ')" v-html="myanswer"></li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <page-bar :total="list.length" @goto="goto"></page-bar>
+    </div>
+    <script src="./navi.js"></script>
+    <script src="./speakingpart23.js"></script>
+    <script src="./app.js"></script>
+</body>
+
+</html>
